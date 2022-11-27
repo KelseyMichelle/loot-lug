@@ -8,13 +8,15 @@ public class BounceBack : MonoBehaviour
 
     public float velocityApplied;
 
-    Camera mainCam = Camera.main;
+    private Camera mainCam;
     private float mainCamHeight;
     private float mainCamWidth;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        mainCam = Camera.main;
         // Calculate on-screen width and height in pixels
         mainCamHeight = 2f * mainCam.orthographicSize;
         mainCamWidth = mainCamHeight * mainCam.aspect;
@@ -22,8 +24,8 @@ public class BounceBack : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float cameraDistX = mainCam.transform.position.x - transform.position.x;
-        float cameraDistY = mainCam.transform.position.y - transform.position.y;
+        float cameraDistX = transform.position.x - mainCam.transform.position.x;
+        float cameraDistY = transform.position.y - mainCam.transform.position.y;
 
         float velocityAdjustment = velocityApplied * Time.deltaTime;
 
