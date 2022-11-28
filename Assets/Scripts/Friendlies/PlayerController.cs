@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     // Player physics
-    private Vector3 playerVelocity;
     private float speedNormalization = 2.0f;
     public Rigidbody2D rb;
     public float playerSpeed;

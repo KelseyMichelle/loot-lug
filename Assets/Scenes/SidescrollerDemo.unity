@@ -8035,6 +8035,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwordSwing
       objectReference: {fileID: 0}
+    - target: {fileID: 6670767030599182332, guid: b41c42bf6eeab46428323675043d466f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6840909013065799262, guid: b41c42bf6eeab46428323675043d466f, type: 3}
       propertyPath: m_RootOrder
       value: 7
