@@ -7,24 +7,25 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    // Player physics
     private Vector3 playerVelocity;
-
+    private float speedNormalization = 2.0f;
     public Rigidbody2D rb;
-    public float playerSpeed = 2.0f;
-    public float attackCooldown;
-    public bool attacked;
-    public bool canAttack;
-    public float speed;
-    public float maxSpeed;
+    public float playerSpeed;
+    // Player -> balloon physics
     public Rigidbody2D balloon;
     public Text distanceText;
     public float minStretchDistance;
     public float maxStretchDistance;
-
-    private float jumpHeight = 1.0f;
-    private float gravityValue = -9.81f;
+    // Player controls
     private Vector2 movementInput = Vector2.zero;
     private Vector2 lookInput = Vector2.zero;
+
+    // Attacks
+    public GameObject swordSwingPrefab;
+    public float attackCooldown;
+    private bool attacked;
+    private bool canAttack;
     
 
     private void Start()
@@ -51,7 +52,7 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         canAttack = false;
-        //Instantiate(SwordSwingPrefab, transform.position, transform.rotation);
+        Instantiate(swordSwingPrefab, transform.position, transform.rotation);
         StartCoroutine(AttackCooldown());
     }
 
@@ -64,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 curMovement = movementInput * playerSpeed * Time.deltaTime * speed;
+        Vector2 curMovement = movementInput * speedNormalization * Time.deltaTime * playerSpeed;
         Vector2 curRotation = new Vector2(lookInput.y, -lookInput.x);
         Quaternion playerRotation = Quaternion.LookRotation(curRotation, Vector3.forward);
         distanceText.text = Vector2.Distance(transform.position, balloon.position).ToString();
@@ -74,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = rb.velocity + curMovement;
 
-        // Changes the height position of the   player..
+
         if (attacked && canAttack)
         {
             Attack();
