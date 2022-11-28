@@ -140,6 +140,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4529822419466441115}
+  - {fileID: 7140917915797810623}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -204,8 +205,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.015760839}
-  m_Size: {x: 0.5, y: 1.2521745}
+  m_Offset: {x: 0.03582871, y: 0.015760839}
+  m_Size: {x: 0.33588147, y: 0.6696693}
   m_Direction: 0
 --- !u!114 &4529822420783780952
 MonoBehaviour:
@@ -301,9 +302,41 @@ MonoBehaviour:
   playerSpeed: 20
   speed: 5
   maxSpeed: 0
-  minStretchDistance: 3
-  maxStretchDistance: 5
+  firePoint: {fileID: 7140917915797810623}
+  minStretchDistance: 1.5
+  maxStretchDistance: 2.5
   pullStrength: 1
-  maxStrength: 5
+  maxStrength: 10
   swordSwingPrefab: {fileID: 6670767030599182332, guid: b41c42bf6eeab46428323675043d466f, type: 3}
   attackCooldown: 1
+--- !u!1 &6350203399594978023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7140917915797810623}
+  m_Layer: 0
+  m_Name: Firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7140917915797810623
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6350203399594978023}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.22, y: 0.001, z: -1.817616}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4529822420783780954}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

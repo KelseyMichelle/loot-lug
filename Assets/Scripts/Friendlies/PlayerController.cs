@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public float playerSpeed = 30f;
     public float speed;
     public float maxSpeed;
+    public Transform firePoint;
 
     // Player controls
     private Vector2 movementInput = Vector2.zero;
@@ -60,7 +62,10 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         canAttack = false;
-        var swordSwing = Instantiate(swordSwingPrefab, transform.position, transform.rotation);
+
+        //var swordOffset = Quaternion.AngleAxis(transform.rotation, new Vector3(2,0,0));
+        var swordOffset = transform.rotation * (swordSwingPrefab.transform.Find("Handle").transform.position - swordSwingPrefab.transform.position);
+        var swordSwing = Instantiate(swordSwingPrefab, firePoint.position - swordOffset, transform.rotation);
         swordSwing.transform.parent = gameObject.transform;
         StartCoroutine(AttackCooldown());
     }
