@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class PlayerController : MonoBehaviour
 {
     private Vector3 playerVelocity;
@@ -59,7 +60,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 curMovement = movementInput * playerSpeed * Time.deltaTime * speed;
-        Vector2 curRotation = -lookInput;
+        Vector2 curRotation = new Vector2(lookInput.y, -lookInput.x);
         Quaternion playerRotation = Quaternion.LookRotation(curRotation, Vector3.forward);
         rb.SetRotation(playerRotation);
 
