@@ -11,14 +11,14 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Environment
+  - Wall
+  - Enemies
+  - EnemyAttacks
+  - Balloon
+  - Attacks
+  - Players
   - 
   - 
   - 
