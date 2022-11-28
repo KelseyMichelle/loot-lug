@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -10,19 +11,19 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVelocity;
 
     public Rigidbody2D rb;
-    public float playerSpeed = 2.0f;
+    public float playerSpeed = 30f;
     public float attackCooldown;
     public bool attacked;
     public bool canAttack;
     public float speed;
     public float maxSpeed;
-    public Rigidbody2D balloon;
-    public Text distanceText;
-    public float minStretchDistance;
-    public float maxStretchDistance;
+    public float minStretchDistance = 3;
+    public float maxStretchDistance = 5;
+    public float pullStrength = 0.1f;
+    public float maxStrength = 0.5f;
 
-    private float jumpHeight = 1.0f;
-    private float gravityValue = -9.81f;
+    private Rigidbody2D balloon;
+    private Text distanceText;
     private Vector2 movementInput = Vector2.zero;
     private Vector2 lookInput = Vector2.zero;
     
@@ -31,6 +32,9 @@ public class PlayerController : MonoBehaviour
     {
         canAttack = true;
         attacked = false;
+        balloon = GameObject.Find("Balloon").GetComponent<Rigidbody2D>();
+        distanceText = GameObject.Find("Distance").GetComponent<Text>();
+
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -67,10 +71,22 @@ public class PlayerController : MonoBehaviour
         Vector2 curMovement = movementInput * playerSpeed * Time.deltaTime * speed;
         Vector2 curRotation = new Vector2(lookInput.y, -lookInput.x);
         Quaternion playerRotation = Quaternion.LookRotation(curRotation, Vector3.forward);
-        distanceText.text = Vector2.Distance(transform.position, balloon.position).ToString();
+
+        var distanceFromBalloon = Vector2.Distance(transform.position, balloon.position);
+        distanceText.text = distanceFromBalloon.ToString();
 
 
         rb.SetRotation(playerRotation);
+
+
+        if (distanceFromBalloon > minStretchDistance)
+        {
+            var moveDirection = (rb.position - balloon.position).normalized;
+            var forceStrength = (float)Math.Pow(Math.Min(pullStrength * (distanceFromBalloon - minStretchDistance), maxStrength),2);
+            var forceApplied = forceStrength * (new Vector2(moveDirection.x, moveDirection.y));
+            balloon.velocity += forceApplied * Time.deltaTime;
+            rb.velocity -= forceApplied*Time.deltaTime;
+        }
 
         rb.velocity = rb.velocity + curMovement;
 
@@ -79,5 +95,6 @@ public class PlayerController : MonoBehaviour
         {
             Attack();
         }
+
     }
 }
