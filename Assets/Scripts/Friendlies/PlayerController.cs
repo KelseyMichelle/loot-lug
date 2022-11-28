@@ -60,9 +60,11 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         canAttack = false;
-        Instantiate(swordSwingPrefab, transform.position, transform.rotation);
+        var swordSwing = Instantiate(swordSwingPrefab, transform.position, transform.rotation);
+        swordSwing.transform.parent = gameObject.transform;
         StartCoroutine(AttackCooldown());
     }
+
 
     IEnumerator AttackCooldown()
     {

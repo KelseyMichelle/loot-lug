@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8557246599118165202}
   - component: {fileID: 3729253049873214243}
   - component: {fileID: 1050356651592377803}
+  - component: {fileID: 6852218200419510081}
   m_Layer: 0
   m_Name: SwordSwing
   m_TagString: Untagged
@@ -127,3 +128,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6852218200419510081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6670767030599182332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c93f42ba2c7b417b8abaa242e47b4ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToLive: 0
